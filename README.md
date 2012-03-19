@@ -1,37 +1,46 @@
-# MATLAB FS12 – Research Plan (Template)
+﻿# MATLAB FS12 – Research Plan (Template)
 (text between brackets to be removed)
 
-> * Group Name: (be creative!)
-> * Group participants names: (alphabetically sorted by last name)
-> * Project Title: (can be changed)
+> * Group Name: BlueMen
+> * Group participants names: 
+Hänni Dominic
+Manser Patrick
+Zoller Stefan
+> * Project Title: Pedestrian dynamics - Train platform dynamics
 
 ## General Introduction
 
-(States your motivation clearly: why is it important / interesting to solve this problem?)
-(Add real-world examples, if any)
-(Put the problem into a historical context, from what does it originate? Are there already some proposed solutions?)
+Since all of us use trains nearly every day, we are well aware of the problem that it takes too long to leave the train platforms 
+because of human traffic jams in front of the stairs. Sometimes this crowd of people even results in missing the connecting train.
+A real-world example - that two uf us experience daily - is the train S12, which goes from Winterthur to Zurich and almost everyone
+gets on the train in Winterthur and gets out in Zurich. That leads to an enormous human traffic jam.
 
 ## The Model
 
-(Define dependent and independent variables you want to study. Say how you want to measure them.) (Why is your model a good abtraction of the problem you want to study?) (Are you capturing all the relevant aspects of the problem?)
-
+In our social forced model, there are many simplifications, but all of them are only small ones. As mentioned before, we want to simulate
+the situation you can observe especially with s-trains. Because of this, we assume that all of the people get out of the train
+at the simulated station, and no person tries to get on the train at that station. This is a good assumption because in real
+s-trains, as describe above, most of the travellers get out at the same station and nearly no person wants to get on the train
+at this station. For the project we will use a agend based simulation with the simplifications mentioned above.
 
 ## Fundamental Questions
 
-(At the end of the project you want to find the answer to these questions)
-(Formulate a few, clear questions. Articulate them in sub-questions, from the more general to the more specific. )
-
+What influence has the shape of the stairs to the bottleneck in front of them? 
+What is the optimal number, size and location of stairs on the train platform?
+Is it better to place few big stairs or many small stairs on the train platform?
 
 ## Expected Results
 
-(What are the answers to the above questions that you expect to find before starting your research?)
+
+We expect to find out that big stairs are more efficient than many small ones. 
+We also expect that parallel shaped stairs are better than for example funnel shaped stairs, as you usually see them in
+trainstations. 
 
 
 ## References 
 
-(Add the bibliographic references you intend to use)
-(Explain possible extension to the above models)
-(Code / Projects Reports of the previous year)
+Project Reports - HS 2010 - Train Boarding Platform Simulation_- Authors: D. Graf, M. Krebs
+Project Suggestions - Spring 2012 - Self-Organized Pedestrian Crowd Dynamics: Experiments, Simulations, and Design Solutions
 
 
 ## Research Methods
@@ -41,4 +50,3 @@
 
 ## Other
 
-(mention datasets you are going to use)
