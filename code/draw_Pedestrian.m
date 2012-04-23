@@ -1,7 +1,6 @@
 % Modeling and Simulating Social Systems with MATLAB
 % BlueMen - Pedestrian Dynamics
 % Dominic Hänni, Patrick Manser, Stefan Zoller
-% Author: Stefan Zoller, 2012
 
 function draw_Pedestrian(x0, y0, r);
 % This function is drawing a Pedestrian
