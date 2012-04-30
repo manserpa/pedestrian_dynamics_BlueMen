@@ -27,12 +27,12 @@ for t = 0 : dt : T
             e_i = v_i / norm(v_i);  % normalized velocity vector of i
             phi_ij = acos(dot(-n_ij, e_i); % angle between n_ij and e_i
             
-            f_ij = A_i1 * exp((r_ij - d_ij) / B_i1) * n_ij * (lambda_i + (1 - lambda_i) * ((1 + cos(phi)) / 2)) + A_i2 * exp((r_ij - d_ij) / B_i2) * n_ij;  % actual force
+            f_ped_ij = A_i1 * exp((r_ij - d_ij) / B_i1) * n_ij * (lambda_i + (1 - lambda_i) * ((1 + cos(phi)) / 2)) + A_i2 * exp((r_ij - d_ij) / B_i2) * n_ij;  % actual force
             
         end
         
         % calculation of the wall force
-        
+        f_wall_i = A_wall * exp((r_wall - d_wall) / B_wall) * n_wall;
         
     end
     
