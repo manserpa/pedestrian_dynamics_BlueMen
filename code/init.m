@@ -1,5 +1,5 @@
 % in this file all variables are declerated
 
-dt = ... % timestep
-T = ... % simulation runtime
-nrped = ... & number of pedestrians
+dt = 0.1; % timestep
+T = 1; % simulation runtime
+nrped = 5; % number of pedestrians
