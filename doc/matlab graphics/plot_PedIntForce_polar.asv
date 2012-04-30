@@ -1,0 +1,25 @@
+% Visualization of the pedestrian interaction force for the project report
+
+clear all
+clc
+
+A_i1 = 80;
+r_ij = 0.6;
+B_i1 = 1;
+n = 1;
+lambda_i = 0.2;
+A_i2 = 40;
+B_i2 = 2;
+
+d = [1 2 3];
+phi = 0 : (pi / 50) : (2 * pi);
+
+for j = 1 : length(d)
+    for i = 1 : length(phi)
+        f_ij(j, i) = A_i1 * exp((r_ij - d(j)) / B_i1) * n * (lambda_i + (1 - lambda_i) * ((1 + cos(phi(i))) / 2)) + A_i2 * exp((r_ij - d(j)) / B_i2) * n;   % ACHTUNG: Dies ist nur der Betrag der Kraft
+    end
+    polar(phi, f_ij(j,:))
+    hold on
+end
+
+legend('d=1', 'd=2', 'd=3', 'Location', 'BestOutside')
