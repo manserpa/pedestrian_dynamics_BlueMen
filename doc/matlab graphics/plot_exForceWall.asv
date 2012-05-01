@@ -1,0 +1,24 @@
+% Visualization of exponential character of the wall force for the project report
+
+clear all
+clc
+
+A_wall = 80;
+r = 0.6;
+B_1 = 1;
+n = 1;
+lambda = 0.2;
+A_2 = 120;
+B_2 = 1;
+phi = 0;
+
+d = [0 : 0.1 : 10];
+
+for i = 1 : length(d)
+     f(i) = A_wall * exp((r - d(i)) / B_wall) * n; % Betrag der Kraft
+end
+
+plot(d, f)
+axis([0 d(end) 0 150])
+xlabel('distance between two pedestrians')
+ylabel('magnitude of force')

@@ -1,0 +1,16 @@
+clc
+
+w = zeros(2,36);
+a = w;
+ft = a;
+fw = ft;
+fto = fw;
+
+
+ for z = 2: 37
+w(:,z-1) = pedM_cell{1,z}(velo,1);
+a(:,z-1) = pedM_cell{1,z}(acc,1);
+ft(:,z-1) = pedM_cell{1,z}(ftarg,1);
+fw(:,z-1) = pedM_cell{1,z}(fwall,1);
+fto(:,z-1) = pedM_cell{1,z}(ftot,1);
+ end

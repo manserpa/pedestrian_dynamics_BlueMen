@@ -32,7 +32,7 @@ for i = 1 : length(x)
     end
 end
 
-plot(force)
+surf(force)
 xlabel('x')
 ylabel('y')
 zlabel('z')

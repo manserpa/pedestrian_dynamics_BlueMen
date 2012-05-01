@@ -2,6 +2,8 @@
 \usepackage{geometry}                
 \geometry{letterpaper}                   
 
+\usepackage{pdfpages}
+
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{epstopdf}
@@ -64,7 +66,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\includepdf{confirmation_en_printed.pdf}
+\newpage
 
 % IMPORTANT
 % you MUST include the ETH declaration of originality here; it is available for download on the course website or at http://www.ethz.ch/faculty/exams/plagiarism/index_EN; it can be printed as pdf and should be filled out in handwriting
@@ -88,7 +91,6 @@
 
 \section{Description of the Model}
 
-\section{Implementation}
 \subsection{Interaction forces}
 \subsubsection{Pedestrian interaction force}
 There are two interaction forces that are calculated separately for every pedestrian in every timestep. \\
@@ -109,6 +111,8 @@ is the distance between the two pedestrians $\alpha$ and $\beta$, \(r_{\alpha\be
 is the normalized vector from $\beta$ to $\alpha$.
 \( \phi_{\alpha\beta}(t) \) is the angle between \(\vec{n}_{\alpha\beta}(t)\) and the direction of movement \( \vec{e}_\alpha(t)=\vec{v}_\alpha(t)/\left\|\vec{v}_\alpha(t)\right\| \) of the pedestrian $\alpha$.
 
+\section{Implementation}
+
 \section{Simulation Results and Discussion}
 
 \section{Summary and Outlook}
@@ -116,8 +120,13 @@ is the normalized vector from $\beta$ to $\alpha$.
 \section{References}
 
 
+\begin{appendix}
 
+\section{Research Plan}
 
+\section{Matlab code}
+
+\end{appendix}
 
 
 \end{document}  
