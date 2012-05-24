@@ -4,8 +4,8 @@ mex mex/perform_front_propagation_3d.cpp mex/perform_front_propagation_3d_mex.cp
 mex mex/perform_circular_front_propagation_2d.cpp mex/perform_front_propagation_2d.cpp mex/fheap/fib.cpp 
 
 % anisotropic FM
-mex mex/anisotropic-fm//perform_front_propagation_anisotropic.cpp
-mex mex/anisotropic-fm-feth/fm2dAniso.cpp
+% mex mex/anisotropic-fm//perform_front_propagation_anisotropic.cpp
+% mex mex/anisotropic-fm-feth/fm2dAniso.cpp
 
 % compiling skeleton
 mex mex/skeleton.cpp

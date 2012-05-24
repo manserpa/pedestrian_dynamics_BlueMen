@@ -9,13 +9,20 @@ clear all
 clc
 
 % conversion meter to pixel
-mtopix = 10; % one meter in reall are 10 pixels in our matrizes
+mtopix = 10; % one meter in reality are 10 pixels in our matrizes
+
+% variables for loop over pedestrians
+nrped_end = 50;
+nrped_mom = 0;
 
 % pedestrian matrix
-pedM = zeros(21, 1);
+pedM = zeros(22, nrped_end);
 
 % aid to access to entries of pedestrian matrix
-pos = [2 1]';   % CAUTION: Because of the indices of a matrix (for M(i,j), i is the y-coordinate and j is the x-coordinate), we change here the order of the indices to address coordinates in a vector 
+% CAUTION: Because of the indices of a matrix (for M(i,j), i is the 
+% y-coordinate and j is the x-coordinate), we change here the order of 
+% the indices to address coordinates in a vector 
+pos = [2 1]';   
 velo = [4 3]';
 acc = [6 5]';
 ftarg = [8 7]';
@@ -29,45 +36,32 @@ radius = 18;
 tstart = 19;
 tend = 20;
 status = 21;
-
-% intialization of pedestrian matrix
-pedM(pos, 1) = [265 5]';
-pedM(velo, 1) = zeros(2,1);
-pedM(acc, 1) = zeros(2,1);
-pedM(ftarg, 1) = zeros(2,1);
-pedM(fwall, 1) = zeros(2,1);
-pedM(fped, 1) = zeros(2,1);
-pedM(ftot, 1) = zeros(2,1);
-pedM(vmax, 1) = 1.5 * mtopix;
-pedM(layer, 1) = 1;
-pedM(weight, 1) = 8;
-pedM(radius, 1) = 0.3 * mtopix;
-pedM(tstart, 1) = 1;
-pedM(tend, 1) = inf;
-pedM(status, 1) = 1;    % [0: not started; 1: on the road; 2: on the stairs; 4: finished]
+% statstairs is 0 or 1, 1 meaning the pedestrian already made his
+% decision and 0 meaning he can still change the target
+statstairs = 22;
 
 % variables for time iteration
 dt = 0.1;
-T = 100;
-pedM_cell = cell(1, T/dt);
-M_cell = cell(1, T/dt);
-
-% variables for loop over pedestrians
-nrped = length(pedM(1, :));
+T = 400;
 
 % variables for pedestrian interaction force
-A_soc = 20 * mtopix;
+c_soc = 0.75 * mtopix;
+A_soc = 100 * mtopix;
 B_soc = 5;
-lambda = 0.2;
+lambda = 0.3;
 A_phys = 30 * mtopix;
-B_phys = 5;
+B_phys = 2;
 d_ped = zeros(2,1);
 r_ped = 0;
 n_ped = zeros(2,1);
 e_ped = zeros(2,1);
 phi_ped = 0;
 
+% constant to reduce speed on stairs
+c_onstairs = 0.55;
+
 % variables for wall force
+c_wall = 0.12 * mtopix;
 intRad_m = 1.5;
 intRad_pix = intRad_m * mtopix; % CAUTION: This has to be a whole number!
 vect_wall = zeros(2,1);
@@ -77,11 +71,26 @@ A_wall = 15 * mtopix;
 B_wall = 0.2 * mtopix;
 
 % variables used to calculate the total force
-% weigth_fped = 0.01;
-% weight_fwall = 0.01;
-% weight_ftarget = 0.9999;
-% weight_f = ([1 1 100]) / norm([1 1 100]); % weight of the forces in the folowing order: [pedestrian_force wall_force target_force]
+weight_fsoc = 1.1;    % weight of the social force
+weight_fwall = 250;  % weight of the wall force
+weight_ftarg = 3650; % weight of the target force
 
-% calculate target forces with fast marcching algorithm
-M = loadSituation();
-[VFX, VFY, I] = computeVF(M);
+% calculate target forces with fast marching algorithm
+[M, Layer, Train] = getMap();
+[Vectorfields] = generateVectorfields(M, Layer);
+
+% stairselected is the number of pedestrians heading to each target at the
+% moment
+[stairselected] = zeros(size(Vectorfields,1),1);
+
+% find possible starting points
+s_area = searchStartingpoints(M);
+
+% cells to save pedM for each person and each timestep. Is the base for
+% the video.
+pedM_cell = cell(1, T/dt);
+stair_cell = cell(1, T/dt);
+for i=1:T/dt
+    pedM_cell{1,i} = zeros(22, nrped_end);
+    stair_cell{1,i} = zeros(size(Vectorfields,1),1);
+end    
